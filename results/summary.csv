@@ -1,0 +1,2 @@
+model_name,final_training_accuracy,final_validation_accuracy,final_training_loss,final_validation_loss,test_accuracy,total_epochs_trained,best_validation_accuracy
+cifar10_cnn,0.483240008354187,0.5372999906539917,1.4233112335205078,1.288878083229065,0.5372999906539917,2,0.5372999906539917
