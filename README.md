@@ -31,6 +31,9 @@ Debilidades: confusión entre camisa y camiseta.
 - Ajustar hiperparámetros.  
 - Usar **modelos preentrenados** para comparar.  
 
+## 📊 Visualización
+![Matriz de confusión Fashion-MNIST](results/1_cnn_classification/prediction_examples.png)
+
 ---
 # Proyecto 2 — DCGAN (CelebA)
 
