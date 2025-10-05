@@ -78,34 +78,92 @@ Después de 5 épocas, las imágenes generadas todavía no son muy nítidas, per
 - Probar métricas como **FID** para evaluar calidad de las imágenes.  
 - Usar arquitecturas más modernas (StyleGAN, WGAN-GP).  
 
+---
+# Proyecto 3 — RAG con SQuAD pequeño
+## 📌 Resumen ejecutivo
 
+Implementé un sistema RAG simple para responder preguntas usando un subset del dataset SQuAD v1.1.
+El sistema combina embeddings con MiniLM-L6-v2, búsqueda con NearestNeighbors, y un modelo lector roberta-base-squad2.
+En 50 preguntas obtuvo 34% EM y 52% F1.
 
-# Proyecto 4 — LSTM con IMDB 
+## 📝 Problema y dataset
+
+- **Problema:** responder preguntas a partir de contextos de texto.
+
+- **Dataset:** subset chico de SQuAD v1.1 (200 ejemplos).
+
+## ⚙️ Metodología
+
+- Crear embeddings de los contextos.
+
+- Recuperar los pasajes más parecidos a la pregunta.
+
+- Usar el modelo QA para extraer la respuesta.
+
+- Evaluar con Exact Match y F1.
+
+## 📊 Resultados
+
+- Exact Match: 34%
+
+- F1 Score: 52%
+
+- Ejemplos guardados en: results/3_rag_qa/examples.csv
+
+## 📚 Lecciones aprendidas
+
+- El sistema funciona, pero a veces trae respuestas parciales.
+
+- F1 refleja mejor el desempeño que el EM.
+
+## 🚀 Trabajo futuro
+
+- Probar FAISS en lugar de NearestNeighbors.
+
+- Usar embeddings más grandes.
+
+- Testear con documentos propios (FAQs o PDFs).
+
+---
+# Proyecto 4 — LSTM con IMDB  
 
 ## 📌 Resumen ejecutivo  
-Entrené una **red LSTM bidireccional** para clasificar reseñas de películas (dataset **IMDB**, con ejemplos en 2 clases: positivo/negativo).  
-El modelo usa **Embedding + SpatialDropout + LSTM con Dropout**. Con 5 épocas alcanzó **85.7% de accuracy en test** y **86.1% de F1 Score**.  
+Entrené una **red LSTM bidireccional** para clasificar reseñas de películas (IMDB, positivo/negativo).  
+El modelo usa **Embedding + SpatialDropout + LSTM con Dropout**.  
+Con 5 épocas alcanzó **86.5% de accuracy** en test y **86.6% de F1 Score**.  
+
+
 
 ## 📝 Problema y dataset  
 - **Problema:** clasificar reseñas de texto como positivas o negativas.  
-- **Dataset:** IMDB reviews (ya tokenizado).  
+- **Dataset:** IMDB reviews (ya tokenizado, 25k train / 25k test).  
+
 
 ## ⚙️ Metodología  
-- **Arquitectura:** Embedding, SpatialDropout1D, Bidirectional LSTM (96 unidades), capa densa sigmoide.  
-- **Entrenamiento:** 5 épocas, Adam (lr=0.0005), batch=128.  
-- **Recursos:** entrenado en CPU estándar.  
+- **Arquitectura:**  
+  - Embedding  
+  - SpatialDropout1D  
+  - Bidirectional LSTM (96 unidades)  
+  - Capa densa sigmoide  
+- **Entrenamiento:**  
+  - 5 épocas  
+  - Adam (lr=0.0005)  
+  - Batch = 128  
+- **Recursos:** CPU estándar.  
 
-## 📊 Resultados 
-- **Accuracy en test:** 85.7%  
-- **F1 Score:** 86.1%  
-- La matriz de confusión muestra buena precisión en ambas clases, con algo más de falsos negativos.  
+## 📊 Resultados  
+- **Accuracy test:** 86.5%  
+- **F1 Score test:** 86.6%  
+- **Loss test:** 0.3245  
+- **Parámetros:** ~2.73M  
+- **Matriz de confusión:** buena precisión en ambas clases, con algo más de falsos negativos.  
+
 
 ## 📚 Lecciones aprendidas  
-- Regularización con Dropout y EarlyStopping reducen overfitting.  
-- F1 es mejor métrica que accuracy para evaluar balance entre positivo y negativo.  
+- Regularización con Dropout y EarlyStopping ayudan a reducir overfitting.  
+- El **F1 Score** refleja mejor el balance entre positivo y negativo que solo accuracy.  
+
 
 ## 🚀 Trabajo futuro  
-- Probar **GRU** o Transformers para mejorar performance.  
-- Usar embeddings preentrenados (GloVe, Word2Vec).  
-- Extender a clasificación multi-clase o análisis más fino de sentimiento.  
-
+- Probar **GRU** o **Transformers** para mejorar performance.    
+- Extender a **clasificación multi-clase** o análisis más fino de sentimiento.  
