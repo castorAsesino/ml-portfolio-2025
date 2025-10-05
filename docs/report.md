@@ -79,50 +79,51 @@ Después de 5 épocas, las imágenes generadas todavía no son muy nítidas, per
 - Usar arquitecturas más modernas (StyleGAN, WGAN-GP).  
 
 ---
-# Proyecto 3 — RAG con SQuAD pequeño
-## 📌 Resumen ejecutivo
+# Proyecto 3 — RAG con SQuAD pequeño  
 
-Implementé un sistema RAG simple para responder preguntas usando un subset del dataset SQuAD v1.1.
-El sistema combina embeddings con MiniLM-L6-v2, búsqueda con NearestNeighbors, y un modelo lector roberta-base-squad2.
-En 50 preguntas obtuvo 34% EM y 52% F1.
+## 📌 Resumen ejecutivo  
+Implementé un **sistema RAG** para responder preguntas usando un subset del dataset **SQuAD v1.1**.  
+El sistema usa **embeddings MiniLM-L6-v2**, un **índice Annoy (angular)** para búsqueda, y un **modelo lector roberta-base-squad2**.  
+En 200 ejemplos alcanzó **72% EM** y **87% F1**.  
 
-## 📝 Problema y dataset
+---
 
-- **Problema:** responder preguntas a partir de contextos de texto.
+## 📝 Problema y dataset  
+- **Problema:** responder preguntas a partir de contextos de texto.  
+- **Dataset:** subset pequeño de SQuAD v1.1 (200 ejemplos).  
 
-- **Dataset:** subset chico de SQuAD v1.1 (200 ejemplos).
+---
 
-## ⚙️ Metodología
+## ⚙️ Metodología  
+1. Crear embeddings de los contextos con MiniLM.  
+2. Usar **Annoy** para recuperar los pasajes más parecidos.  
+3. Aplicar el modelo QA (roberta-base-squad2) para extraer la respuesta.  
+4. Evaluar con Exact Match (EM) y F1.  
 
-- Crear embeddings de los contextos.
+---
 
-- Recuperar los pasajes más parecidos a la pregunta.
+## 📊 Resultados  
+- **Exact Match (EM):** 72%  
+- **F1 Score:** 87%  
+- **Tiempo total:** ~47.7s  
+- Ejemplos guardados en: `results/3_rag_qa/examples.csv`  
 
-- Usar el modelo QA para extraer la respuesta.
+📈 La distribución de F1 muestra que la mayoría de respuestas están cerca de 1.0, aunque hay algunos casos con F1 bajo.  
 
-- Evaluar con Exact Match y F1.
+---
 
-## 📊 Resultados
+## 📚 Lecciones aprendidas  
+- Con Annoy el sistema recupera rápido y bastante bien.  
+- **F1 es más representativo que EM** porque cuenta respuestas parciales.  
+- Todavía aparecen respuestas incompletas en algunos ejemplos difíciles.  
 
-- Exact Match: 34%
+---
 
-- F1 Score: 52%
+## 🚀 Trabajo futuro  
+- Probar **FAISS** en lugar de Annoy.  
+- Usar **embeddings más grandes** o especializados.  
+- Testear con **documentos propios** (FAQs o PDFs).  
 
-- Ejemplos guardados en: results/3_rag_qa/examples.csv
-
-## 📚 Lecciones aprendidas
-
-- El sistema funciona, pero a veces trae respuestas parciales.
-
-- F1 refleja mejor el desempeño que el EM.
-
-## 🚀 Trabajo futuro
-
-- Probar FAISS en lugar de NearestNeighbors.
-
-- Usar embeddings más grandes.
-
-- Testear con documentos propios (FAQs o PDFs).
 
 ---
 # Proyecto 4 — LSTM con IMDB  
