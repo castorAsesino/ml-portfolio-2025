@@ -28,7 +28,7 @@ desktop.ini
 .idea/
 
 # --- Datos y artefactos grandes ---
-assets/
+
 data/
 datasets/
 temp_gan_data/
