@@ -1,29 +1,31 @@
-# Proyecto 1 — CNN (CIFAR-10)
-**Autor:** Tu Nombre • **Fecha:** 2025-10-04
+# Proyecto 1 — CNN con Fashion-MNIST  
 
-## Resumen ejecutivo
-Se implementó una **CNN baseline** para clasificar imágenes de CIFAR-10. El pipeline descarga el dataset, entrena el modelo,
-y registra métricas y artefactos (curvas, matriz de confusión, ejemplos) junto a un `results/summary.csv` con columnas
-**accuracy, F1, loss, epochs, params, tiempo**. Este módulo sirve como pieza demostrable en entrevistas.
+## Resumen ejecutivo  
+Entrené una **red neuronal convolucional (CNN)** para clasificar prendas en el dataset **Fashion-MNIST** (70,000 imágenes en 10 clases).  
+El modelo combina capas convolucionales con **BatchNorm** y **Dropout**, entrenado 10 épocas con **Adam (lr=0.001, batch=64)**.  
+Alcanzó **90.6% de accuracy** y **90.7% de F1 Score**. Funciona muy bien en categorías fáciles (pantalones, bolsos) y presenta más dificultad en clases similares (camisa vs. camiseta).  
 
-## Problema y dataset
-- **Tarea:** Clasificación multi-clase (10 clases).
-- **Dataset:** CIFAR-10 (32×32 RGB; 50k entrenamiento, 10k test). Carga con `torchvision.datasets.CIFAR10`.
+## Problema y dataset  
+- **Problema:** clasificar ropa en 10 categorías, incluso en casos visualmente parecidos.  
+- **Dataset:** Fashion-MNIST (imágenes 28x28 en escala de grises).  
 
-## Metodología
-- **Arquitectura:** 3 bloques Conv-BN-ReLU + MaxPool; clasificador MLP con Dropout.
-- **Hiperparámetros clave:** batch 128, 3–10 épocas, LR 0.01, weight decay 1e-4, optim SGD con momentum 0.9.
-- **Aumentación:** RandomCrop(32, padding=4), HorizontalFlip, ColorJitter leve.
-- **Recursos computacionales:** CPU/GPU (CUDA si disponible).
+## Metodología  
+- **Arquitectura:** CNN con 4 bloques Conv2D + MaxPooling, BatchNorm y Dropout.  
+- **Entrenamiento:** 10 épocas, Adam (lr=0.001), batch=64.  
+- **Recursos:** entrenado en CPU estándar.  
 
-## Resultados
-- `results/summary.csv` agrega una fila por corrida con: accuracy, F1, loss, epochs, params, tiempo de entrenamiento.
-- Figuras en `results/<run_id>/`: `loss_curve.png`, `acc_curve.png`, `confusion_matrix.png`, `examples_correct.png`, `examples_incorrect.png`.
+## Resultados y discusión  
+- **Accuracy en test:** 90.6%  
+- **F1 Score:** 90.7%  
+- **Fortalezas:** pantalones y bolsos casi perfectos (>98%).  
+- **Debilidades:** confusión entre camisas y camisetas por similitud visual.  
 
-## Discusión
-- La CNN baseline converge de forma estable con *augmentations* moderados. La matriz de confusión revela clases con mayor ambigüedad visual.
-- Ajustes de LR/regularización pueden mejorar el balance entre *underfitting* y *overfitting*.
+## Lecciones aprendidas  
+- BatchNorm + Dropout ayudan a mejorar generalización.  
+- Accuracy no es suficiente; F1 Score y métricas por clase dan más contexto.  
+- La visualización de ejemplos ayuda a identificar problemas temprano.  
 
-## Lecciones aprendidas y trabajo futuro
-- Añadir búsqueda de hiperparámetros, Mixup/CutMix, y *label smoothing*.
-- Explorar *early stopping* y *reduce-on-plateau* para entrenamientos más largos.
+## Trabajo futuro  
+- Aplicar **data augmentation** (rotaciones, zoom).  
+- Ajustar hiperparámetros para mayor precisión.  
+- Explorar **transfer learning** con modelos preentrenados.  
