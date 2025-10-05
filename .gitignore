@@ -18,7 +18,7 @@ __pycache__/
 .ipynb_checkpoints/
 notebooks/*-checkpoint.ipynb
 # Resultados intermedios dentro de notebooks
-notebooks/results/
+
 
 # --- SO y editores ---
 .DS_Store
@@ -38,7 +38,7 @@ temp_gan_data/
 *.7z
 
 # --- Resultados / artefactos de entrenamiento ---
-results/
+
 wandb/
 mlruns/
 lightning_logs/
