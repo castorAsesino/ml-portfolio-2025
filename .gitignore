@@ -51,10 +51,7 @@ lightning_logs/
 *.keras
 *.log
 
-# Si por alguna razón se generan sueltos:
-metrics.csv
-classification_report.txt
-confusion_matrix.png
+
 
 # --- Hugging Face / caches ---
 .huggingface/
