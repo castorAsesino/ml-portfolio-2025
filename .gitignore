@@ -1,0 +1,72 @@
+# --- Entornos / build ---
+.venv/
+venv/
+env/
+ml-portfolio-env/
+*.egg-info/
+pip-wheel-metadata/
+dist/
+build/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+notebooks/*-checkpoint.ipynb
+# Resultados intermedios dentro de notebooks
+notebooks/results/
+
+# --- SO y editores ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# --- Datos y artefactos grandes ---
+assets/
+data/
+datasets/
+temp_gan_data/
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# --- Resultados / artefactos de entrenamiento ---
+results/
+wandb/
+mlruns/
+lightning_logs/
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.tflite
+*.h5
+*.keras
+*.log
+
+# Si por alguna razón se generan sueltos:
+metrics.csv
+classification_report.txt
+confusion_matrix.png
+
+# --- Hugging Face / caches ---
+.huggingface/
+huggingface/
+.cache/
+cache/
+
+# --- FAISS / Annoy / otros índices ---
+*.index
+*.ann
+
+# --- Otros ---
+logs/
+tmp/
+temp/
