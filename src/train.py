@@ -13,6 +13,22 @@ import tensorflow as tf
 import time
 import os
 import matplotlib.pyplot as plt
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader, Dataset
+from torchvision import datasets, transforms
+import torchvision.utils as vutils
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+import time
+import random
+from PIL import Image
+import csv
+from utils import (print_welcome_message, weights_init)
+from scipy.linalg import sqrtm
+from torchvision.models import inception_v3
 
 class FashionMNISTTrainer:
     def __init__(self, model, model_name):
@@ -85,4 +101,64 @@ class FashionMNISTTrainer:
     def get_model_params(self):
         """Obtener número de parámetros del modelo"""
         return self.model.count_params()
-    
+
+
+
+
+# Generator Model
+class Generator(nn.Module):
+    def __init__(self, nz=100, ngf=64, nc=3):
+        super(Generator, self).__init__()
+        self.main = nn.Sequential(
+            # input: (nz) x 1 x 1
+            nn.ConvTranspose2d(nz, ngf * 8, 4, 1, 0, bias=False),
+            nn.BatchNorm2d(ngf * 8),
+            nn.ReLU(True),
+            # state: (ngf*8) x 4 x 4
+            nn.ConvTranspose2d(ngf * 8, ngf * 4, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(ngf * 4),
+            nn.ReLU(True),
+            # state: (ngf*4) x 8 x 8
+            nn.ConvTranspose2d(ngf * 4, ngf * 2, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(ngf * 2),
+            nn.ReLU(True),
+            # state: (ngf*2) x 16 x 16
+            nn.ConvTranspose2d(ngf * 2, ngf, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(ngf),
+            nn.ReLU(True),
+            # state: (ngf) x 32 x 32
+            nn.ConvTranspose2d(ngf, nc, 4, 2, 1, bias=False),
+            nn.Tanh()
+            # state: (nc) x 64 x 64
+        )
+
+    def forward(self, input):
+        return self.main(input)
+
+# Discriminator Model
+class Discriminator(nn.Module):
+    def __init__(self, ndf=64, nc=3):
+        super(Discriminator, self).__init__()
+        self.main = nn.Sequential(
+            # input: (nc) x 64 x 64
+            nn.Conv2d(nc, ndf, 4, 2, 1, bias=False),
+            nn.LeakyReLU(0.2, inplace=True),
+            # state: (ndf) x 32 x 32
+            nn.Conv2d(ndf, ndf * 2, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(ndf * 2),
+            nn.LeakyReLU(0.2, inplace=True),
+            # state: (ndf*2) x 16 x 16
+            nn.Conv2d(ndf * 2, ndf * 4, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(ndf * 4),
+            nn.LeakyReLU(0.2, inplace=True),
+            # state: (ndf*4) x 8 x 8
+            nn.Conv2d(ndf * 4, ndf * 8, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(ndf * 8),
+            nn.LeakyReLU(0.2, inplace=True),
+            # state: (ndf*8) x 4 x 4
+            nn.Conv2d(ndf * 8, 1, 4, 1, 0, bias=False),
+            nn.Sigmoid()
+        )
+
+    def forward(self, input):
+        return self.main(input).view(-1, 1)

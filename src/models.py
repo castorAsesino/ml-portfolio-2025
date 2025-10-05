@@ -44,3 +44,5 @@ def create_cnn_model(input_shape=(28, 28, 1), num_classes=10):
 
 # MODELOS DCGAN
 # === DCGAN MODELS ===
+
+

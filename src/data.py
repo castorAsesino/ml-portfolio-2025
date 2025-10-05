@@ -55,3 +55,59 @@ class FashionMNISTData:
     
 
 # CLASE PARA GAN 
+
+class CelebAData:
+    def __init__(self, img_size=64):
+        self.img_size = img_size
+        self.data_path = "../assets/img_align_celeba"
+    
+    def load_data(self, num_images=None):
+        """Cargar y preprocesar dataset CelebA"""
+        import os
+        from PIL import Image
+        
+        print("Cargando dataset CelebA...")
+        
+        # Obtener lista de archivos
+        image_files = [f for f in os.listdir(self.data_path) if f.endswith(('.jpg', '.png', '.jpeg'))]
+        
+        if num_images:
+            image_files = image_files[:num_images]
+        
+        images = []
+        for i, file in enumerate(image_files):
+            if i % 1000 == 0:
+                print(f"Procesando imagen {i}/{len(image_files)}")
+            
+            try:
+                # Cargar y redimensionar imagen
+                img_path = os.path.join(self.data_path, file)
+                img = Image.open(img_path)
+                
+                # Recortar región central de la cara (128x128 -> 64x64)
+                width, height = img.size
+                left = (width - 128) / 2
+                top = (height - 128) / 2
+                right = (width + 128) / 2
+                bottom = (height + 128) / 2
+                img = img.crop((left, top, right, bottom))
+                
+                # Redimensionar a tamaño objetivo
+                img = img.resize((self.img_size, self.img_size))
+                
+                # Convertir a array y normalizar
+                img_array = np.array(img) / 255.0
+                images.append(img_array)
+                
+            except Exception as e:
+                print(f"Error procesando {file}: {e}")
+        
+        images = np.array(images)
+        print(f"Dataset CelebA cargado: {images.shape}")
+        
+        return images
+    
+    def get_sample_images(self, num_samples=16):
+        """Obtener muestras del dataset"""
+        images = self.load_data(num_samples)
+        return images

@@ -23,6 +23,22 @@ from datetime import datetime
 import numpy as np
 from scipy.linalg import sqrtm
 import tensorflow as tf
+import sys
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader, Dataset
+from torchvision import datasets, transforms
+import torchvision.utils as vutils
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+import time
+import random
+from PIL import Image
+import csv
+from scipy.linalg import sqrtm
+from torchvision.models import inception_v3
 
 
 
@@ -270,6 +286,11 @@ def calculate_metrics(model, x_test, y_test, class_names):
 
 
 #FUNCIONES PARA GAN 
-# === DCGAN UTILS ===
-#FUNCIONES PARA GAN 
-# === DCGAN UTILS ===
+# Custom weight initialization
+def weights_init(m):
+    classname = m.__class__.__name__
+    if classname.find('Conv') != -1:
+        nn.init.normal_(m.weight.data, 0.0, 0.02)
+    elif classname.find('BatchNorm') != -1:
+        nn.init.normal_(m.weight.data, 1.0, 0.02)
+        nn.init.constant_(m.bias.data, 0)

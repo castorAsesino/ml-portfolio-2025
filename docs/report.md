@@ -1,34 +1,90 @@
 # Proyecto 1 — CNN con Fashion-MNIST  
 
 ## Resumen ejecutivo  
-Entrené una **red neuronal convolucional (CNN)** para clasificar prendas en el dataset **Fashion-MNIST** (70,000 imágenes en 10 clases).  
-El modelo combina capas convolucionales con **BatchNorm** y **Dropout**, entrenado 10 épocas con **Adam (lr=0.001, batch=64)**.  
-Alcanzó **90.6% de accuracy** y **90.7% de F1 Score**. Funciona muy bien en categorías fáciles (pantalones, bolsos) y presenta más dificultad en clases similares (camisa vs. camiseta).  
+Entrené una CNN para clasificar ropa con el dataset **Fashion-MNIST**.  
+Con 10 épocas logré **92.2% de accuracy** y **92.2% de F1 Score**. El modelo anda muy bien en clases fáciles como pantalones y bolsos, pero se complica un poco con camisas y camisetas.  
 
 ## Problema y dataset  
-- **Problema:** clasificar ropa en 10 categorías, incluso en casos visualmente parecidos.  
-- **Dataset:** Fashion-MNIST (imágenes 28x28 en escala de grises).  
+- **Problema:** reconocer 10 tipos de prendas.  
+- **Dataset:** Fashion-MNIST (70k imágenes 28x28 en escala de grises).  
 
 ## Metodología  
-- **Arquitectura:** CNN con 4 bloques Conv2D + MaxPooling, BatchNorm y Dropout.  
-- **Entrenamiento:** 10 épocas, Adam (lr=0.001), batch=64.  
-- **Recursos:** entrenado en CPU estándar.  
+- **Arquitectura:** CNN con 4 capas conv + BatchNorm y Dropout.  
+- **Entrenamiento:** Adam, lr=0.001, batch=64, 10 épocas.  
+- **Recursos:** corrido en CPU común.  
 
-## Resultados y discusión  
-- **Accuracy en test:** 90.6%  
-- **F1 Score:** 90.7%  
-- **Fortalezas:** pantalones y bolsos casi perfectos (>98%).  
-- **Debilidades:** confusión entre camisas y camisetas por similitud visual.  
+## Resultados  
+- Accuracy: **92.2%**  
+- F1 Score: **92.2%**  
+- Tiempo: ~1242s  
+- Parámetros: ~470k  
+
+Fortalezas: pantalón, bolso y sandalia casi perfectos.  
+Debilidades: confusión entre camisa y camiseta.  
 
 ## Lecciones aprendidas  
-- BatchNorm + Dropout ayudan a mejorar generalización.  
-- Accuracy no es suficiente; F1 Score y métricas por clase dan más contexto.  
-- La visualización de ejemplos ayuda a identificar problemas temprano.  
+- BatchNorm + Dropout ayudan bastante.  
+- Ver métricas por clase muestra dónde se equivoca.  
 
 ## Trabajo futuro  
-- Aplicar **data augmentation** (rotaciones, zoom).  
-- Ajustar hiperparámetros para mayor precisión.  
-- Explorar **transfer learning** con modelos preentrenados.  
+- Probar **data augmentation**.  
+- Ajustar hiperparámetros.  
+- Usar **modelos preentrenados** para comparar.  
+
+
+## 📌 Resumen ejecutivo  
+Entrené un **DCGAN** para generar rostros usando el dataset **CelebA**. El modelo tiene un **generator** y un **discriminator** entrenados con imágenes reales de 64x64.  
+Después de 5 épocas, las imágenes generadas todavía no son muy nítidas, pero muestran formas de caras.  
+
+---
+
+## 📝 Problema y dataset  
+- **Problema:** generar imágenes sintéticas de rostros que se parezcan a los reales.  
+- **Dataset:** CelebA (caras de famosos, recortadas a 64x64).  
+
+---
+
+## ⚙️ Metodología  
+- **Arquitectura:**  
+  - Generator: 3.57M parámetros  
+  - Discriminator: 2.76M parámetros  
+  - Latent vector z = 100  
+- **Entrenamiento:**  
+  - Épocas: 5  
+  - Batch size: 64  
+  - Learning rate: 0.0002  
+- **Recursos:** entrenado en CPU estándar (tardó ~1725s).  
+
+---
+
+## 📊 Resultados y discusión  
+- **Pérdida Generator (G):** 7.94  
+- **Pérdida Discriminator (D):** 0.60  
+- **Tiempo total:** ~1726s  
+
+**Observaciones:**  
+- El modelo aprendió formas básicas de caras.  
+- Aún le falta nitidez y detalle.  
+- Se necesita más entrenamiento y tal vez más filtros.  
+
+📷 Ejemplo: comparación entre imágenes reales y generadas (ver `comparison_final.png`).  
+
+---
+
+## 📚 Lecciones aprendidas  
+- Entrenar GANs es más lento y menos estable que CNNs.  
+- El balance entre G y D es clave (si uno gana mucho, el otro falla).  
+- Las métricas clásicas (accuracy, F1) no sirven: se usa la pérdida y visualización.  
+
+---
+
+## 🚀 Trabajo futuro  
+- Entrenar más épocas.  
+- Usar GPU para mejorar velocidad.  
+- Probar métricas como **FID** para evaluar calidad de las imágenes.  
+- Usar arquitecturas más modernas (StyleGAN, WGAN-GP).  
+
+
 
 # Proyecto 4 — LSTM con IMDB 
 
