@@ -3,3 +3,5 @@ fashion_mnist_cnn_baseline,1_cnn_classification,,,,,470122.0,,,,0.92189997434616
 dcgan_celeba_64,2_dcgan_generation,,,7.941555023193359,5.0,6342272.0,1725.8725130558014,7.941555023193359,0.6044010519981384,,,,,,,,,,,,,,,,
 lstm_imdb_tuned,4_lstm_text_imdb,,,,,2732993.0,,,,0.86516,0.3244646489620209,0.866299131400468,5613.424862146378,5.0,0.9224500060081482,0.8736000061035156,0.2276593297719955,0.3116050660610199,2025-10-05T19:14:40.008374,,,,,,
 MiniLM + Annoy + roberta-base-squad2,,,0.8705873015873016,,,,,,,,,,,,,,,,,RAG-QA,0.72,,"{""retriever"": ""Annoy(angular)"", ""reader"": ""roberta-base-squad2"", ""k"": 3}",,RAG simple con Annoy (SQuAD subset); ejemplos en results/3_rag_qa/examples.csv
+bert-base-uncased,,,0.9050949050949052,,2.0,,,,,,,,,,,,,,,Transformer-IMDB,0.905,0.2395423846762804,109483778,14358.2,Fine-tune en subset IMDB (5000 train / 2000 test)
+bert-base-uncased,,,0.9050949050949051,,2.0,,,,,,,,,,,,,,,Transformer-IMDB,0.905,0.23954238467628047,109483778,14358.2,Fine-tune en subset IMDB (5000 train / 2000 test)

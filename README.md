@@ -168,3 +168,60 @@ Con 5 épocas alcanzó **86.5% de accuracy** en test y **86.6% de F1 Score**.
 ## 🚀 Trabajo futuro  
 - Probar **GRU** o **Transformers** para mejorar performance.    
 - Extender a **clasificación multi-clase** o análisis más fino de sentimiento.  
+
+
+# Proyecto 5 — Transformer con IMDB  
+
+## 📌 Resumen ejecutivo  
+Entrené un modelo **DistilBERT** para clasificar reseñas de películas como positivas o negativas.  
+Con 2 épocas de entrenamiento en un subset pequeño del dataset IMDB, logré **90.5% de accuracy** y **90.5% de F1 Score**.  
+
+---
+
+## 📝 Problema y dataset  
+- **Problema:** análisis de sentimiento en reseñas de películas.  
+- **Dataset:** IMDB reviews (usé un subset para que sea más rápido en mi PC).  
+
+---
+
+## ⚙️ Metodología  
+- **Modelo:** `distilbert-base-uncased` (transformer liviano).  
+- **Entrenamiento:**  
+  - Épocas: 2  
+  - Batch size: 8  
+  - Learning rate: 2e-5  
+- **Recursos:** CPU común, entrenamiento más lento (~4 horas).  
+
+---
+
+## 📊 Resultados  
+- **Accuracy test:** 90.5%  
+- **F1 Score test:** 90.5%  
+- **Loss test:** 0.2395  
+- **Parámetros:** ~66M  
+- **Tiempo total:** ~14,358s (≈ 4h)  
+
+📈 Gráficos guardados en `../results/5_transformer/`:  
+- `training_loss.png`  
+- `confusion_matrix.png`  
+- `examples.csv` (predicciones correctas e incorrectas).  
+
+Ejemplo correcto:  
+✅ *This movie is fantastic!* → Positiva (predicho bien)  
+
+Ejemplo incorrecto:  
+❌ *I didn’t like the story at all* → Positiva (predicho mal)  
+
+---
+
+## 📚 Lecciones aprendidas  
+- Los Transformers son muy potentes, pero **entrenar en CPU es lento**.  
+- El F1 es más representativo que solo accuracy.  
+- Guardar curvas y ejemplos ayuda a explicar el modelo.  
+
+---
+
+## 🚀 Trabajo futuro  
+- Probar con GPU para acelerar el entrenamiento.  
+- Usar `bert-base-uncased` o `roberta-base` para comparar.  
+- Extender a multi-clase (más matices de sentimientos).  
