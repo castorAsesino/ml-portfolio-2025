@@ -31,6 +31,9 @@ Debilidades: confusión entre camisa y camiseta.
 - Ajustar hiperparámetros.  
 - Usar **modelos preentrenados** para comparar.  
 
+## 📊 Visualización
+![Matriz de confusión Fashion-MNIST](results/1_cnn_classification/prediction_examples.png)
+
 ---
 # Proyecto 2 — DCGAN (CelebA)
 
@@ -78,6 +81,9 @@ Después de 5 épocas, las imágenes generadas todavía no son muy nítidas, per
 - Probar métricas como **FID** para evaluar calidad de las imágenes.  
 - Usar arquitecturas más modernas (StyleGAN, WGAN-GP).  
 
+
+## 📊 Visualización
+![Matriz de confusión Fashion-MNIST](results/2_dcgan_generation/generated_images_final.png)
 ---
 # Proyecto 3 — RAG con SQuAD pequeño  
 
@@ -124,7 +130,8 @@ En 200 ejemplos alcanzó **72% EM** y **87% F1**.
 - Usar **embeddings más grandes** o especializados.  
 - Testear con **documentos propios** (FAQs o PDFs).  
 
-
+## 📊 Visualización
+![Matriz de confusión Fashion-MNIST](results/3_rag_qa/f1_hist.png)
 ---
 # Proyecto 4 — LSTM con IMDB  
 
@@ -169,6 +176,8 @@ Con 5 épocas alcanzó **86.5% de accuracy** en test y **86.6% de F1 Score**.
 - Probar **GRU** o **Transformers** para mejorar performance.    
 - Extender a **clasificación multi-clase** o análisis más fino de sentimiento.  
 
+  ## 📊 Visualización
+![Matriz de confusión Fashion-MNIST](results/4_lstm_text_imdb/learning_curves.png)
 
 # Proyecto 5 — Transformer con IMDB  
 
@@ -225,3 +234,5 @@ Ejemplo incorrecto:
 - Probar con GPU para acelerar el entrenamiento.  
 - Usar `bert-base-uncased` o `roberta-base` para comparar.  
 - Extender a multi-clase (más matices de sentimientos).  
+- Extender a **clasificación multi-clase** o análisis más fino de sentimiento.
+
